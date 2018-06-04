@@ -1,0 +1,34 @@
+set C := 1, 2, 3;
+
+param alpha := 1 5.9659 2 2.2954 3 1;
+/*
+#normal
+param ns :=	1	15 
+			2	15;		 
+param fn := 8;
+param ccn := 11;
+param crn := 5;
+param psn := 8;		
+*/
+#/*
+#large
+param ns :=	1	30 
+			2	30;		 
+param fn := 15;
+param ccn := 20;
+param crn := 10;
+param psn := 15;
+#*/
+/*
+#xlarge
+param ns :=	1	50 
+			2	50;		 
+param fn := 25;
+param ccn := 35;
+param crn := 15;
+param psn := 25;
+*/	
+
+			
+
+

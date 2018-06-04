@@ -1,0 +1,30 @@
+solve_message = 'Knitro 10.3.0: Locally optimal or satisfactory solution.\
+objective 142.11332175188278; integrality gap -5.68e-14\
+1 nodes; 2 subproblem solves'
+
+:     X      V       :=
+1 1   1   70.5721
+1 2   1   71.5412
+1 3   1      .
+2 2   1   71.5412
+2 3   1      .
+3 3   1      .
+;
+
+:            D         B       :=
+1 1 2 1   40         0
+1 1 2 2   10.4348   29.5652
+1 1 2 3    0        20
+1 1 3 1    0         0
+1 1 3 2    0         0
+1 1 3 3    0         0
+1 2 3 1   40         0
+1 2 3 2    0        10.4348
+1 2 3 3    0         0
+2 2 3 1    0         0
+2 2 3 2   29.5652    0
+2 2 3 3    0        20
+;
+
+Vap = 142.113
+

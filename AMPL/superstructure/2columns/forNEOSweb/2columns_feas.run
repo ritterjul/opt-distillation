@@ -1,0 +1,78 @@
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+
+#fix stages
+fix {n in Sm[1] diff {fn}} F[n]:= 0;
+fix {n in Sm[2] diff {crn}} CR[n] := 0;
+fix {n in Sm[2] diff {ccn}} CC[n] := 0;
+fix {n in Sm[2] diff {psn}} PS[n] := 0;
+/*
+#have sufficient flows inside the columns
+#rigorous
+subject to liqFlow1: L[1,ns[1]] >= 0.1*Fall;
+subject to liqFlow2: L[2,ns[2]] >= 0.1*Fall;
+*/
+#/*
+#CMO
+subject to liqFlow1: Ls[1] >= 0.1*Fall;
+subject to liqFlow2: Ls[2] >= 0.1*Fall;
+#*/
+
+#find feasible inital values
+minimize Dummy: 0;
+objective Dummy;
+solve;
+
+option display_precision 10;
+#create initial values
+/*
+#fix outgoing/connecting flows *all
+fix PC[1] := 0.25*Fall;
+fix PR[1] := 0.25*Fall;
+fix CC[ccn] := 0.25*Fall;
+fix CR[crn] := 0.25*Fall;
+fix PC[2] := 0.2*Fall;
+fix PR[2] := 0.2*Fall;
+fix PS[psn] := 0.1*Fall;
+solve;
+display Vs, y, Ls, x, PC, PR;
+
+#fix outgoing/connecting flows *indirect
+fix PC[1] := 0;
+fix PR[1] := 0.3*Fall;
+fix CC[ccn] := 0.7*Fall;
+fix CR[crn] := 0;
+fix PC[2] := 0.4*Fall;
+fix PR[2] := 0.3*Fall;
+fix PS[psn] := 0;
+solve;
+display Vs, y, Ls, x, PC, PR;
+
+#fix outgoing/connecting flows *direct
+fix PC[1] := 0.3*Fall;
+fix PR[1] := 0;
+fix CC[ccn] := 0;
+fix CR[crn] := 0.7*Fall;
+fix PC[2] := 0.4*Fall;
+fix PR[2] := 0.3*Fall;
+fix PS[psn] := 0;
+solve;
+display Vs, y, Ls, x, PC, PR;
+
+#fix outgoing/connecting flows *prefrac
+fix PC[1] := 0;
+fix PR[1] := 0;
+fix CC[ccn] := 0.5*Fall;
+fix CR[crn] := 0.5*Fall;
+fix PC[2] := 0.3*Fall;
+fix PR[2] := 0.3*Fall;
+fix PS[psn] := 0.4*Fall;
+solve;
+display Vs, y, Ls, x, PC, PR;
+*/
+
+
+
+
+

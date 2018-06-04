@@ -1,0 +1,83 @@
+Connecting to: neos-server.org:3333
+Job 5882685 submitted to NEOS, password='eVIOaNJC'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882685&pass=eVIOaNJC
+Job 5882685 dispatched
+password: eVIOaNJC
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 159.08725480086815; feasibility error 1.13e-09
+674 iterations; 2207 function evaluations
+
+suffix feaserror OUT;
+suffix opterror OUT;
+suffix numfcevals OUT;
+suffix numiters OUT;
+Connecting to: neos-server.org:3333
+Job 5882687 submitted to NEOS, password='lxMehfFk'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882687&pass=lxMehfFk
+Job 5882687 dispatched
+password: lxMehfFk
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 192.08440791471767; feasibility error 1.26e-07
+11 iterations; 14 function evaluations
+Connecting to: neos-server.org:3333
+Job 5882688 submitted to NEOS, password='AqQgBMTm'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882688&pass=AqQgBMTm
+Job 5882688 dispatched
+password: AqQgBMTm
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 231.54541309924718; feasibility error 0.000142
+73 iterations; 156 function evaluations
+Connecting to: neos-server.org:3333
+Job 5882690 submitted to NEOS, password='qLbuxBZk'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882690&pass=qLbuxBZk
+Job 5882690 dispatched
+password: qLbuxBZk
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 527.2183666806728; feasibility error 5.49e-10
+22 iterations; 28 function evaluations
+Connecting to: neos-server.org:3333
+Job 5882691 submitted to NEOS, password='sXTGluCd'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882691&pass=sXTGluCd
+Job 5882691 dispatched
+password: sXTGluCd
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 1480.9374798022477; feasibility error 2.74e-08
+17 iterations; 20 function evaluations
+Connecting to: neos-server.org:3333
+Job 5882692 submitted to NEOS, password='yBeUgwMX'
+Check the following URL for progress report :
+https://neos-server.org/neos/cgi-bin/nph-neos-solver.cgi?admin=results&jobnumber=5882692&pass=yBeUgwMX
+Job 5882692 dispatched
+password: yBeUgwMX
+---------- Begin Solver Output -----------
+Condor submit: 'neos.submit'
+Condor submit: 'watchdog.submit'
+Job submitted to NEOS HTCondor pool.
+Knitro 10.3.0: Locally optimal or satisfactory solution.
+objective 99.65382793087407; feasibility error 6.68e-05
+36 iterations; 43 function evaluations

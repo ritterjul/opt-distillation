@@ -1,0 +1,24 @@
+normal,CONOPT,,filter,,MINLP,
+CMO,start_all,increase beta,start_all,increase beta,start_all,increase_beta
+0.8,infeas,infeas,157.76,157.76,155.61,155.61
+,,,prefrac,prefrac,direct,direct
+0.9,425.83,infeas,276.65,infeas,196.15,196.15
+,app. prefrac,,s. indirect,,direct,direct
+0.95,infeas,infeas,260.99,infeas,infeas,250.12
+,,,indirect,,,direct
+0.99,infeas,infeas,infeas,infeas,697.16,error
+,,,,,direct,
+0.995,2395.5,infeas,infeas,infeas,infeas,infeas
+,indirect,,,,,
+large,,,,,,
+CMO,start_all,increase beta,start_all,increase beta,start_all,increase_beta
+0.8,106.83,106.83,infeas,infeas,133.07,133.07
+,app. prefrac,app. prefrac,,,direct,direct
+0.9,133.82,133.82,infeas,infeas,181.27,159
+,prefrac,prefrac,,,indirect,direct
+0.95,195.49,161.99,infeas,infeas,infeas,169.11
+,s. direct,prefrac,,,,direct
+0.99,450.83,430.62,infeas,infeas,infeas,188.63
+,s. direct,prefrac,,,,direct
+0.995,infeas,340.23,infeas,infeas,289.35,202.29
+,,s. indirect,,,indirect,direct

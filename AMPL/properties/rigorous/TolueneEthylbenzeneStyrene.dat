@@ -1,0 +1,38 @@
+# x - CONFIDENTIAL
+# Toluene/Methylbenzene (1), Ethylbenzene (2), Styrene/Ethenylbenzene (3)
+
+set C := 1, 2, 3;
+
+param cPr : 			2	1	3 :=
+			1	x	x	x
+			2	x	x	x
+			3	x	x	x
+			4	x	x	x
+			5	x	x	x;
+			
+param Tref := x;
+
+param cH : 			2	1	3 :=
+			1	x	x	x
+			2	x	x	x
+			3	x	x	x
+			4	x	x	x
+			5	x	x	x;
+			
+param ch : 			2	1	3 :=
+			1	x	x	x
+			2	x	x	x
+			3	x	x	x
+			4	x	x	x
+			5	x	x	x;
+			
+param cGamma := 
+		[*,2,2] 1	x 	2	x	3	x
+		[*,2,1] 1	x 	2	x	3	x
+		[*,2,3] 1	x 	2	x	3	x
+		[*,1,2] 1	x 	2	x	3	x
+		[*,1,1] 1	x	2	x	3	x
+		[*,1,3] 1	x 	2	x	3	x
+		[*,3,2] 1	x 	2	x	3	x
+		[*,3,1] 1	x 	2	x	3	x
+		[*,3,3] 1 	x 	2 	x 	3 	x;

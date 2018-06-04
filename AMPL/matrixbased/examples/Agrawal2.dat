@@ -1,0 +1,4 @@
+#example Agrawal 2 
+param Fall := 0.5;
+param xF := 1 0.25 2 0.25 3 0.25 4 0.25;
+data properties/CMO/PropaneIsobutaneN-ButaneN-Pentane.dat

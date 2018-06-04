@@ -1,0 +1,42 @@
+#find minimum vapour flow with Underwood for all basic configurations
+#take indices of basic configurations computed by matrixCheck.run (set PF)
+#for each basic configuration, based on fixedTopology model, optimize vapour flow
+
+reset;
+
+option solver 'kestrel';
+option kestrel_options 'solver=KNITRO';
+
+model 'matrixbased/fixedTopology.mod';
+
+#choose example (find&replace)
+set C;
+data 'matrixbased/examples/GrossmannA_123.dat';
+let NC:= card(C);
+#load corresponding indices of basic configurations
+set PF;
+data 'matrixbased/feasibility/results/feas_3.dat';
+
+reset data xF;
+data;
+param xF := 1 0.7 2 0.2 3 0.1;
+
+#fix entries of left and right boundaries to 1
+let X[1,1] := 1;
+for {i in 1..NC} {let X[i,NC] := 1;}
+
+#power set of indices of free matrix entries
+set S {p in PF} := {(i,j) in U: p div 2^(i+sum{k in 1..j-1}k-2) mod 2 == 1};
+
+for {p in PF} {
+	for {(i,j) in S[p]: j in 2..NC-1} {
+		let X[i,j]:= 1;
+	}
+	for {(i,j) in (U diff S[p]): j in 2..NC-1} {
+		let X[i,j]:= 0;
+	}
+	solve;
+	display solve_message, X, V, D, B, Vap > 'matrixbased/results/enumeration/GrossmannA_123_721.txt';
+}
+
+close;

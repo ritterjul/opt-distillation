@@ -1,0 +1,22 @@
+143.32,159.09,141.63,147.14,159.09,141.62,147.14,159.09,141.63
+mix,indirect,prefrac,direct,indirect,prefrac,direct,indirect,prefrac
+185.33,192.08,234.16,723.48,192.08,723.48,185.33,192.08,723.48
+direct,indirect,s.indirect,prefrac,indirect,prefrac,direct,indirect,prefrac
+400.74,231.55,400.74,236.43,231.55,infeas,236.43,231.55,infeas
+s. indirect,indirect,s.indirect,direct,indirect,,direct,indirect,
+647.96,527.49,infeas,647.96,527.22,infeas,647.96,527.22,infeas
+direct,indirect,,direct,indirect,,direct,indirect,
+2094.5,1480.94,infeas,2094.5,1480.94,infeas,infeas,1480.94,infeas
+direct,indirect,,direct,indirect,,,indirect,
+,,,,,,,,
+start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac
+116.37,139.86,99.14,128.97,140.71,99.95,128.97,140.71,infeas
+mix,app. indirect,app. prefrac,direct,indirect,prefrac,direct,indirect,
+145.74,166.45,127.6,151.78,166.45,127.6,151.78,166.45,127.6
+mix,indirect,prefrac,direct,indirect,prefrac,direct,indirect,prefrac
+160.41,178.09,154.49,160.97,178.08,154.49,160.97,178.01,infeas
+app. direct,indirect,prefrac,direct,indirect,prefrac,direct,indirect,
+181.41,192.45,386.24,181.41,386.24,386.24,181.61,192.45,386.24
+direct,indirect,prefrac,direct,prefrac,prefrac,direct,indirect,prefrac
+196.41,200.35,279.61,196.41,infeas,5525.9,infeas,200.35,infeas
+direct,indirect,s. indirect,direct,,prefrac,,indirect,

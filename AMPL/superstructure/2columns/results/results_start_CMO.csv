@@ -1,0 +1,24 @@
+normal,CONOPT,,,filter,,,MINLP,,
+CMO,start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac
+0.8,152.72,174.28,152.72,infeas,174.28,157.76,155.61,174.28,157.76
+,mix,indirect,mix,,indirect,prefrac,direct,indirect,
+0.9,196.15,212,196.15,infeas,212,infeas,196.15,212,infeas
+,direct,indirect,direct,,indirect,,direct,indirect,
+0.95,250.12,260.99,infeas,infeas,260.99,infeas,250.12,260.99,infeas
+,direct,,,,indirect,,direct,,
+0.99,697.16,infeas,697.16,infeas,669.27,infeas,infeas,error,infeas
+,direct,,direct,,indirect,,,,
+0.995,2566.17,infeas,2566.17,infeas,infeas,infeas,infeas,infeas,infeas
+,direct,,direct,,,,,,
+large,,,,,,,,,
+CMO,start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac,start_direct,start_indirect,start_prefrac
+0.8,132.5,152.93,106.83,106.83,infeas,106.83,133.07,infeas,106.85
+,app. direct,app. indirect,app. prefrac,app. prefrac,,app. prefrac,direct,,prefrac
+0.9,infeas,181.19,181.83,infeas,infeas,infeas,159,infeas,181.19
+,,indirect,app. s. indirect,,,,direct,,indirect
+0.95,168.49,193.24,206.51,infeas,infeas,infeas,169.11,infeas,161.99
+,app. direct,indirect,s. indirect,,,,direct,,prefrac
+0.99,188.63,212.33,212.33,infeas,infeas,infeas,188.63,infeas,infeas
+,direct,indirect,indirect,,,,direct,,
+0.995,202.29,223.77,340.23,infeas,infeas,infeas,error,infeas,infeas
+,direct,indirect,s. indirect,,,,,,

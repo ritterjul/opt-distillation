@@ -1,0 +1,6 @@
+#from Caballero, Grossmann (Design of distillation sequences: from conventional to fully thermally coupled distillation systems, Computers & Chemical Engineering)
+#example 1 -reduced(3,4,5)
+
+set C := 1, 2, 3;
+
+param alpha := 1 3.2 2 1.55 3 1.0;

@@ -1,0 +1,73 @@
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+
+
+#fix stages
+fix {n in Sm[1] diff {fn}} F[n]:= 0;
+fix {n in Sm[2] diff {crn}} CR[n] := 0;
+fix {n in Sm[2] diff {ccn}} CC[n] := 0;
+fix {n in Sm[2] diff {psn}} PS[n] := 0;
+
+
+
+#restrict to 3 topologies: 
+/*
+#MINLP
+var yPC1 binary;
+var yPR1 binary;
+var yPS binary;
+subject to Top: 1 = yPC1 + yPR1 + yPS;
+subject to TopPC1: 0 >= (1-yPC1)*PC[1] + yPC1*sum{m in Sm[2]} CC[m];
+subject to TopPR1: 0 >= (1-yPR1)*PR[1] + yPR1*sum{m in Sm[2]} CR[m];;
+subject to Top3: 0 >= (1-yPS)*sum{m in Sm[2]} PS[m];
+*/
+/*
+#MPCC
+redeclare subject to TopPC:
+0 <= PC[1] complements sum{m in Sm[2]} CC[m] >= 0;
+redeclare subject to TopPR:
+0 <= PR[1] complements sum{m in Sm[2]} CR[m] >= 0;
+redeclare subject to TopPS:
+0 <= sum{m in Sm[2]} PS[m] complements PC[1]+PR[1] >= 0;
+*/
+
+#minimize overall vapour flow
+minimize VapourFlow: Vap;
+objective VapourFlow;
+/*
+#constrain overall vapour flow
+subject to VapourFlow: Vap <=10*Fall;
+*/
+
+var Sep  =
+PC[1]*sum{c in C} y[1,ns[1],c]^2
++ PR[1]*sum{c in C} x[1,1,c]^2 
++ PC[2]*sum{c in C} y[2,ns[2],c]^2 
++ PR[2]*sum{c in C} x[2,1,c]^2
++ sum{m in Sm[2]} PS[m]*sum{c in C} x[2,m,c]^2;
+
+redeclare subject to Separation: Sep >= 0.8*Fall;
+solve;
+display _varname, _var;
+redeclare subject to Separation: Sep >= 0.9*Fall;
+solve;
+display _varname, _var;
+redeclare subject to Separation: Sep >= 0.95*Fall;
+solve;
+display _varname, _var;
+redeclare subject to Separation: Sep >= 0.99*Fall;
+solve;
+display _varname, _var;
+redeclare subject to Separation: Sep >= 0.995*Fall;
+solve;
+display _varname, _var;
+
+
+
+
+
+
+
+
+

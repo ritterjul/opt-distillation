@@ -1,0 +1,1026 @@
+#calculate minimum vapour flow for fixed splits and fixed solver for all different test scenarios (CMO/rig model, 6 mixtures, normal/large column size)
+
+#choose solver (find&replace)
+reset;
+option solver 'kestrel';
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 2 reduced - A 123 
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'BenzeneTolueneEthylbenzene.dat';
+
+let NS := 15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\BenzeneTolueneEthylbenzene\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\BenzeneTolueneEthylbenzene\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 2 reduced - A 123 
+update data;
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'BenzeneTolueneEthylbenzene.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\BenzeneTolueneEthylbenzene\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\BenzeneTolueneEthylbenzene\rigorous';
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 2 reduced - A 234
+update data;
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'TolueneEthylbenzeneStyrene.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\TolueneEthylbenzeneStyrene\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\TolueneEthylbenzeneStyrene\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\TolueneEthylbenzeneStyrene\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\TolueneEthylbenzeneStyrene\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 2 reduced - A 234
+update data;
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'TolueneEthylbenzeneStyrene.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\TolueneEthylbenzeneStyrene\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\TolueneEthylbenzeneStyrene\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\TolueneEthylbenzeneStyrene\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\TolueneEthylbenzeneStyrene\rigorous';
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 3 reduced - B 235
+update data;
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'Iso_1Propanol1_Butanol.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_1Propanol1_Butanol\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_1Propanol1_Butanol\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_1Propanol1_Butanol\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_1Propanol1_Butanol\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 3 reduced - B 235
+update data;
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'Iso_1Propanol1_Butanol.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_1Propanol1_Butanol\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_1Propanol1_Butanol\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_1Propanol1_Butanol\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_1Propanol1_Butanol\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 3 reduced - B 245
+update data;
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'Iso_PropanolIso_1Butanol.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_PropanolIso_1Butanol\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_PropanolIso_1Butanol\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_PropanolIso_1Butanol\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_PropanolIso_1Butanol\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 3 reduced - B 245
+update data;
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'Iso_PropanolIso_1Butanol.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_PropanolIso_1Butanol\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_PropanolIso_1Butanol\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\Iso_PropanolIso_1Butanol\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\Iso_PropanolIso_1Butanol\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 1 reduced - C 235
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'HeptaneOctaneDecane.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\HeptaneOctaneDecane\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\HeptaneOctaneDecane\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\HeptaneOctaneDecane\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\HeptaneOctaneDecane\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 1 reduced - C 235
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'HeptaneOctaneDecane.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\HeptaneOctaneDecane\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\HeptaneOctaneDecane\rigorous';
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\HeptaneOctaneDecane\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\HeptaneOctaneDecane\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+
+model 'column_CMO.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#Grossmann 1 reduced - C 345
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'OctaneNonaneDecane.dat';
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\OctaneNonaneDecane\CMO';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\OctaneNonaneDecane\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\OctaneNonaneDecane\CMO';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\OctaneNonaneDecane\CMO';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+reset;
+option solver kestrel;
+option kestrel_options 'solver=KNITRO';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+model 'column_rig.mod';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#Grossmann 1 reduced - C 345
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'OctaneNonaneDecane.dat';
+
+
+let NS :=	15;	 
+let fn := 8;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\OctaneNonaneDecane\rigorous';
+update data;
+data 'start_normal.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\OctaneNonaneDecane\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_normal.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_normal.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_normal.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_normal.out';
+
+
+let NS := 30;	 
+let fn := 15;
+
+#fix feed stage
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\OctaneNonaneDecane\rigorous';
+update data;
+data 'start_large.dat';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\KNITRO\OctaneNonaneDecane\rigorous';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to first split
+redeclare subject to LK: PC*y[NS,1] >= 0.95*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.95*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_095_large.out';
+redeclare subject to LK: PC*y[NS,1] >= 0.99*Fall*xF[1];
+redeclare subject to HK: PR*x[1,2] >= 0.99*Fall*xF[2];
+solve;
+display solve_message, _varname, _var > 'Split1_099_large.out';
+
+let {j in 1.._nvars} _var[j] := _var[j].init0;
+#constrain to second split
+redeclare subject to LK: PC*y[NS,2] >= 0.95*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.95*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_095_large.out';
+redeclare subject to LK: PC*y[NS,2] >= 0.99*Fall*xF[2];
+redeclare subject to HK: PR*x[1,3] >= 0.99*Fall*xF[3];
+solve;
+display solve_message, _varname, _var > 'Split2_099_large.out';
+
+
+close;
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL';

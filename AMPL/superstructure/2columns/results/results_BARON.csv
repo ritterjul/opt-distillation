@@ -1,0 +1,23 @@
+CMO,,
+normal,,
+0.8,152.72,155.62
+,mic,direct
+0.9,196.15,196.15
+,direct,direct
+0.95,250.13,250.13
+,direct,direct
+0.99,671.96,670.08
+,indirect,indirect
+0.995,2407.43,infeas
+,indirect,
+large,,
+0.8,123.6,133.07
+,mix,direct
+0.9,153.52,159
+,mix,direct
+0.95,168.48,169.11
+,app. direct,direct
+0.99,188.63,212.36
+,direct,indirect
+0.995,202.29,202.33
+,direct,direct

@@ -1,0 +1,31 @@
+#find basic configuration with minimum vapour flow with Underwood 
+#feasible set of basic configurations described by hybrid method
+#output: configuration, vapour flow and connecting streams
+
+reset;
+
+option solver 'kestrel';
+option kestrel_options 'solver=Bonmin';
+
+model 'matrixbased/hybridmethod.mod';
+
+#choose example (find&replace)
+set C;
+data 'matrixbased/examples/GrossmannA_123.dat';
+let NC:= card(C);
+
+#vary feed composition
+#/*
+reset data xF;
+data;
+param xF := 1 0.1 2 0.8 3 0.1;
+#*/
+
+#fix entries of left and right boundaries to 1
+fix X[1,1] := 1;
+fix {i in 1..NC} X[i,NC] := 1;
+
+solve;
+display solve_message, X, V, D, B, Vap > 'matrixbased/results/hybridmethod/GrossmannA_123_181_Bonmin.txt';
+
+close;

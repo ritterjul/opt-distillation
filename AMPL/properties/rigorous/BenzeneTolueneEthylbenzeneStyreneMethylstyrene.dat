@@ -1,0 +1,58 @@
+# x - CONFIDENTIAL
+# Benzene (1), Toluene/Methylbenzene (2), Ethylbenzene (3), Styrene/Ethenylbenzene (4), Methystyrene/2-Phenyl-1-Propene (5)
+
+set C := 1, 2, 3, 4, 5;
+
+param Pr := x
+
+param cPr : 			1	2	3	4 	5:=
+			1	x	x	x 	x 	x	
+			2	x 	x 	x 	x	x
+			3	x 	x 	x 	x	x
+			4	x	x	x	x	x
+			5	x	x	x	x	x;
+			
+param Tref := 298;
+
+param cH : 			1	2	3	4 	5:=
+			1	x	x	x 	x 	x	
+			2	x 	x 	x 	x	x
+			3	x 	x 	x 	x	x
+			4	x	x	x	x	x
+			5	x	x	x	x	x;
+				
+param ch : 			1	2	3	4 	5:=
+			1	x	x	x 	x 	x	
+			2	x 	x 	x 	x	x
+			3	x 	x 	x 	x	x
+			4	x	x	x	x	x
+			5	x	x	x	x	x;
+
+			
+param cGamma := 
+		[*,1,1] 1	x	2	x	3	x
+		[*,1,2] 1	x	2	x	3	x
+		[*,1,3] 1	x	2	x	3	x
+		[*,1,4] 1	x	2	x	3	x
+		[*,1,5] 1	x	2	x	3	x
+		[*,2,1] 1	x	2	x	3	x
+		[*,2,2] 1	x	2	x	3	x
+		[*,2,3] 1	x	2	x	3	x
+		[*,2,4] 1	x	2	x	3	x
+		[*,2,5] 1	x	2	x	3	x
+		[*,3,1] 1	x	2	x	3	x
+		[*,3,2] 1	x	2	x	3	x
+		[*,3,3] 1	x	2	x	3	x
+		[*,3,4] 1	x	2	x	3	x
+		[*,3,5] 1	x	2	x	3	x
+		[*,4,1] 1	x	2	x	3	x
+		[*,4,2] 1	x	2	x	3	x
+		[*,4,3] 1	x	2	x	3	x
+		[*,4,4] 1	x	2	x	3	x
+		[*,4,5] 1	x	2	x	3	x
+		[*,5,1] 1	x	2	x	3	x
+		[*,5,2] 1	x	2	x	3	x
+		[*,5,3] 1	x	2	x	3	x
+		[*,5,4] 1	x	2	x	3	x
+		[*,5,5] 1	x	2	x	3	x;
+		

@@ -1,0 +1,30 @@
+#find all basic configurations by enumeration based on hybrid model
+#for all possible settings of matrix entry variables, find basic configuration with most coinciding entries
+#output: matrixes corresponding to basic configurations (with duplicates)
+
+reset;
+
+option solver 'ilogcp'; #can handle non-smooth function max
+
+model 'matrixbased/feasibility/matrixmethod.mod';
+
+let NC := 4; #size of matrix
+
+fix X[1,1] := 1;
+fix {i in 1..NC} X[i,NC] := 1;
+
+#power set of indices of free matrix entries
+set S {p in 0..2^((NC-2)*(NC+1)/2)-1} := {(i,j) in U: p div 2^(i+sum{k in 1..j-1}k-2) mod 2 == 1};
+
+#objective that is maximal, if variable is one on indixed set and 0 elsewhere
+maximize onesS {p in 0..2^((NC-2)*(NC+1)/2)-1}: sum{j in 2..NC-1, i in 1..j: (i,j) in S[p]} X[i,j] - sum{j in 2..NC-1, i in 1..j: (i,j) not in S[p]} X[i,j];
+
+for {p in 0..2^((NC-2)*(NC+1)/2)-1} {
+	objective onesS[p];
+	solve;
+	display X > 'matrixbased/feasibility/results/matrixmethod_results4.txt';
+}
+
+close;
+
+

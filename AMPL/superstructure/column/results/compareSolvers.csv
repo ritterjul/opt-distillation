@@ -1,0 +1,24 @@
+BenzeneTolueneEthylbenzene,,,,,,,,
+,,CONOPT,filter ,Knitro,LANCELOT,LOQO,MINOS,SNOPT
+CMO,,,,,,,,
+normal,,,,,,,,
+Split 1,0.95,21,11,150,137,20,infeas,138
+,0.99,11,7,92,202,15,infeas,16
+Split 2,0.95,15,11,32,267,24,infeas,231
+,0.99,12,8,350,it limit,16,infeas,50
+large,,,,,,,,
+Split 1,0.95,13,14,infeas,it limit,33,infeas,infeas
+,0.99,11,7,infeas,229,19,infeas,238
+Split 2,0.95,16,16,70,302,24,infeas,355
+,0.99,8,7,53,358,16,infeas,40
+rigorous,,,,,,,,
+normal,,,,,,,,
+Split 1,0.95,13,28,62,it limit,20,510,it limit
+,0.99,12,128,11,it limit,20,infeas,181
+Split 2,0.95,15,38,32,it limit,25,infeas,2898
+,0.99,12,424,9,it limit,20,infeas,59
+large,,,,,,,,
+Split 1,0.95,17,41,65,it limit,500,infeas,373
+,0.99,11,23,16,it limit,463,infeas,131
+Split 2,0.95,16,52,78,it limit,26,infeas,infeas
+,0.99,9,23,19,it limit,170,infeas,603

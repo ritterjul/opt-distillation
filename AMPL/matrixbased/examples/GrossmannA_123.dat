@@ -1,0 +1,4 @@
+#example Grossmann A reduced(1,2,3)
+param Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data properties/CMO/BenzeneTolueneEthylbenzene.dat

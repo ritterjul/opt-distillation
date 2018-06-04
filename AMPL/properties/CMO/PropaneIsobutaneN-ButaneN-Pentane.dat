@@ -1,0 +1,5 @@
+#from Agrawal (Synthesis of Energy Efficient Distillation  Configurations and New Dividing Wall Columns, WCCE Barcelona)
+
+set C := 1 2 3 4;
+
+param alpha := 1 8.11 2 3.53 3 1.5 4 1.0;

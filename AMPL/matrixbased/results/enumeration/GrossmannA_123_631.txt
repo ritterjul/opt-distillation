@@ -1,0 +1,90 @@
+solve_message = 'Knitro 10.3.0: Locally optimal or satisfactory solution.\
+objective 246.0244443114714; feasibility error 8.95e-11\
+12 iterations; 14 function evaluations'
+
+:     X      V       :=
+1 1   1   129.74
+1 2   1   116.285
+1 3   1      .
+2 2   0     0
+2 3   1      .
+3 3   1      .
+;
+
+:         D    B     :=
+1 1 2 1   60    0
+1 1 2 2   30    0
+1 1 2 3    0    0
+1 1 3 1    0    0
+1 1 3 2    0    0
+1 1 3 3    0   10
+1 2 3 1   60    0
+1 2 3 2    0   30
+1 2 3 3    0    0
+2 2 3 1    0    0
+2 2 3 2    0    0
+2 2 3 3    0    0
+;
+
+Vap = 246.024
+
+solve_message = 'Knitro 10.3.0: Locally optimal or satisfactory solution.\
+objective 178.03929269829723; feasibility error 4.66e-09\
+7 iterations; 9 function evaluations'
+
+:     X      V        :=
+1 1   1   117.162
+1 2   0     0
+1 3   1       .
+2 2   1    60.8772
+2 3   1       .
+3 3   1       .
+;
+
+:         D    B     :=
+1 1 2 1    0    0
+1 1 2 2    0   30
+1 1 2 3    0   10
+1 1 3 1   60    0
+1 1 3 2    0    0
+1 1 3 3    0    0
+1 2 3 1    0    0
+1 2 3 2    0    0
+1 2 3 3    0    0
+2 2 3 1    0    0
+2 2 3 2   30    0
+2 2 3 3    0   10
+;
+
+Vap = 178.039
+
+solve_message = 'Knitro 10.3.0: Locally optimal or satisfactory solution.\
+objective 190.3809194741714; feasibility error 9.74e-11\
+12 iterations; 14 function evaluations'
+
+:     X      V        :=
+1 1   1    87.9634
+1 2   1   102.418
+1 3   1       .
+2 2   1   102.418
+2 3   1       .
+3 3   1       .
+;
+
+:            D          B        :=
+1 1 2 1   60          0
+1 1 2 2    7.82608   22.1739
+1 1 2 3    0         10
+1 1 3 1    0          0
+1 1 3 2    0          0
+1 1 3 3    0          0
+1 2 3 1   60          0
+1 2 3 2    0          7.82608
+1 2 3 3    0          0
+2 2 3 1    0          0
+2 2 3 2   22.1739     0
+2 2 3 3    0         10
+;
+
+Vap = 190.381
+

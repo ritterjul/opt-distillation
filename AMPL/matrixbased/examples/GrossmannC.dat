@@ -1,0 +1,4 @@
+# example Grossmann C
+param Fall := 200;
+param xF := 1 0.1 2 0.2 3 0.3 4 0.2 5 0.2;
+data properties/CMO/HexaneHeptaneOctaneNonaneDecane.dat

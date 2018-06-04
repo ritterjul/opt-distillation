@@ -1,0 +1,122 @@
+#calculate minimum vapour flow for increasing beta for fixed solver, mixture, model, column size and intial values
+
+#choose solver (find&replace)
+reset;
+option solver 'kestrel';
+option kestrel_options 'solver=Knitro';
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\2columns';
+
+#choose model (find&replace)
+model '2columns_rigorous.mod';
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#choose mixture (comment&uncomment, then find&replace)
+#/*
+#Grossmann 2 - A
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'BenzeneTolueneEthylbenzene.dat';
+#data 'TolueneEthylbenzeneStyrene.dat';
+#*/
+
+/*
+#Grossmann 3 - B
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+#data 'Iso_1Propanol1_Butanol.dat';
+data 'Iso_PropanolIso_1Butanol.dat';
+*/
+
+/*
+#Grossmann 1 - C
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'HeptaneOctaneDecane.dat';
+#data 'OctaneNonaneDecane.dat';
+*/
+
+#choose size (find&replace)
+#normal (=maximal size for 3 components)
+data;
+param NS :=	1	15 
+			2	15;		 
+param fn := 8;
+param ccn := 11;
+param crn := 5;
+param psn := 8;	
+	
+
+#fix stages
+fix {n in Sm[1] diff {fn}} F[n]:= 0;
+fix {n in Sm[2] diff {crn}} CR[n] := 0;
+fix {n in Sm[2] diff {ccn}} CC[n] := 0;
+fix {n in Sm[2] diff {psn}} PS[n] := 0;
+
+
+#/*
+#choose initial values (mixture, model, size and configuration specific) OPTIONAL
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\2columns\results\start\BenzeneTolueneEthylbenzene\rigorous\normal';
+data 'start_all.dat';
+#*/
+
+
+#restrict to 3 topologies: OPTIONAL
+/*
+#MPCC
+redeclare subject to TopPC:
+0 <= PC[1] complements sum{m in Sm[2]} CC[m] >= 0;
+redeclare subject to TopPR:
+0 <= PR[1] complements sum{m in Sm[2]} CR[m] >= 0;
+redeclare subject to Top:
+0 <= PC[1] complements PR[1] >= 0;
+redeclare subject to TopPS:
+0 <= sum{m in Sm[2]} PS[m] complements PC[1]+PR[1] >= 0;
+*/
+/*
+#MINLP
+var yPC1 binary;
+var yPR1 binary;
+var yPS binary;
+subject to Top: 1 = yPC1 + yPR1 + yPS;
+subject to TopPC1: 0 >= (1-yPC1)*PC[1] + yPC1*sum{m in Sm[2]} CC[m];
+subject to TopPR1: 0 >= (1-yPR1)*PR[1] + yPR1*sum{m in Sm[2]} CR[m];;
+subject to Top3: 0 >= (1-yPS)*sum{m in Sm[2]} PS[m];
+*/
+
+#choose results folder (solver, mixture, model and size specific)
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\2columns\results\NLP_Knitro\BenzeneTolueneEthylbenzene\rigorous\normal\start_all\increase_beta';
+
+var Sep  =
+PC[1]*sum{c in C} y[1,NS[1],c]^2
++ PR[1]*sum{c in C} x[1,1,c]^2 
++ PC[2]*sum{c in C} y[2,NS[2],c]^2 
++ PR[2]*sum{c in C} x[2,1,c]^2
++ sum{m in Sm[2]} PS[m]*sum{c in C} x[2,m,c]^2;
+
+
+#constrain overall separation
+
+redeclare subject to Separation: Sep >= 0.8*Fall;
+solve;
+display solve_message, _varname, _var > 'minVap_08Sep.out';
+redeclare subject to Separation: Sep >= 0.9*Fall;
+solve;
+display solve_message, _varname, _var > 'minVap_09Sep.out';
+redeclare subject to Separation: Sep >= 0.95*Fall;
+solve;
+display solve_message, _varname, _var > 'minVap_095Sep.out';
+redeclare subject to Separation: Sep >= 0.99*Fall;
+solve;
+display solve_message, _varname, _var > 'minVap_099Sep.out';
+redeclare subject to Separation: Sep >= 0.995*Fall;
+solve;
+display solve_message, _varname, _var > 'minVap_0995Sep.out';
+
+close;
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL';
+
+

@@ -1,0 +1,91 @@
+#calculate feasible solution for fixed model, mixture, column size
+
+#all calculations done with KNITRO
+reset;
+option solver 'kestrel';
+option kestrel_options 'solver=KNITRO';
+option display_precision 10; #increase display precision, so that calculated solutions can be used as inital values
+
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column';
+
+#choose model (comment&uncomment)
+model 'column_CMO.mod';
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\CMO';
+
+#model 'column_rigorous.mod';
+#cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\properties\rigorous';
+
+#choose mixture (comment&uncomment, then find&replace)
+#/*
+#Grossmann 2 - A
+data;
+param  Fall := 100;
+param xF := 1 0.3 2 0.4 3 0.3;
+data 'BenzeneTolueneEthylbenzene.dat';
+#data 'TolueneEthylbenzeneStyrene.dat';
+#*/
+
+/*
+#Grossmann 3 - B
+data;
+param Fall := 200; 
+param xF := 1 0.3 2 0.4 3 0.3;
+#data 'Iso_1Propanol1_Butanol.dat';
+data 'Iso_PropanolIso_1Butanol.dat';
+*/
+
+/*
+#Grossmann 1 - C
+data;
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+#data 'HeptaneOctaneDecane.dat';
+data 'OctaneNonaneDecane.dat';
+*/
+
+#find feasible inital values
+minimize Dummy: 0;
+objective Dummy;
+
+#fix outgoing flow
+fix PR := 0.5*Fall;
+
+#normal size column
+data;
+param NS := 15;
+param fn := 8;
+
+#fix stages
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+solve;
+
+#choose results folder (mixture(find&replac) and model(comment&uncomment) specific)
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\CMO';
+display Vs, y, Ls, x, PC, PR > 'start_normal.dat';
+
+#cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\rigorous';
+#display V, y, L, x, PC, PR, T, TF, QC, QR > 'start_normal.dat';
+
+#large column
+redeclare param NS := 30;
+redeclare param fn := 15;
+
+#fix stages
+fix {n in Sm diff {fn}} F[n]:= 0;
+
+solve;
+
+#choose results folder (mixture(find&replac) and model(comment&uncomment) specific)
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\CMO';
+display Vs, y, Ls, x, PC, PR > 'start_large.dat';
+
+#cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL\superstructure\column\results\start\BenzeneTolueneEthylbenzene\rigorous';
+#display V, y, L, x, PC, PR, T, TF, QC, QR > 'start_large.dat';
+
+close;
+cd 'C:\Users\Juliane\Documents\Studium\Masterarbeit\Code\AMPL';
+
+
+
+

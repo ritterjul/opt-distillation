@@ -1,0 +1,31 @@
+#find all basic configurations by enumeration based on graph model
+#for all possible settings of edge variables, find basic configuration with most coinciding edges
+#output: matrixes corresponding to basic configurations (with duplicates)
+
+reset;
+
+option solver 'CPLEX';
+
+model 'matrixbased/feasibility/graphmethod.mod';
+
+let NC:= 4; #size of matrix
+
+#power set of indices of edges
+set S {p in 0..2^(NC*(NC-1)*(NC+1)/6)-1} := {(i,j,l) in E: p div 2^(sum{m in 1..j-1}m*(NC-m)+(i-1)*(NC-j)+l-j-1) mod 2 == 1};
+
+#objective that is maximal, if variable is one on indixed set and 0 elsewhere
+maximize onesS {p in 0..2^(NC*(NC-1)*(NC+1)/6)-1}: sum{(i,j,l) in E: (i,j,l) in S[p]} Y[i,j,l] - sum{(i,j,l) in E: (i,j,l) not in S[p]} Y[i,j,l];
+
+set U := {i in 1..NC, j in 1..NC : i <= j};
+param X {U};
+let X[1,1] := 1;
+for {i in 1..NC} {let X[i,NC] := 1};
+
+for {p in 0..2^(NC*(NC-1)*(NC+1)/6)-1} {
+	objective onesS[p];
+	solve;
+	for {(i,j) in U: j in 2..NC-1} {let X[i,j] := sum{l in j+1..NC} Y[i,j,l];}
+	display x > 'matrixbased/feasibility/results/graphmethod_results4.txt';
+}
+
+close;

@@ -1,0 +1,53 @@
+#finp all basic configurations by enumeration 
+#for all possible settings of matrix entry variables, check feasibility
+#output: matrixes corresponping to basic configurations (WITHOUT puplicates), inpizes of feasible configuration in power set
+
+reset;
+
+param NC := 6; #size of matrix
+
+set U := {i in 1..NC, j in 1..NC : i <= j}; #inpices of upper triangle of matrix
+param X {U} binary; #variables for entries in matrix
+
+set P := 0..2^((NC-2)*(NC+1)/2)-1; #set of possible settings of x
+
+#fix entries of left anp right bounparies to 1
+let X[1,1] := 1;
+for {i in 1..NC} {let X[i,NC] := 1;}
+
+param feas {P}; #inpicate if configuration is feasible
+
+#power set of inpices of free matrix entries
+set S {p in P} := {(i,j) in U: p div 2^(i+sum{k in 1..j-1}k-2) mod 2 == 1};
+
+for {p in P} {
+	for {(i,j) in S[p]: j in 2..NC-1} {
+		let X[i,j]:= 1;
+	}
+	for {(i,j) in (U diff S[p]): j in 2..NC-1} {
+		let X[i,j]:= 0;
+	}
+	let feas[p] := 1;
+	for {(i,j) in U: j in 2..NC} {
+		if sum{m in 1..j-i} X[i,j-m] + sum{m in 1..i-1} X[i-m,j-m] < X[i,j] then {
+		let feas[p] := 0;
+		}
+	}
+	for {(i,j) in U: j in 1..NC-2 and X[i,j]=1} {
+		for {k in 1..NC-j: X[i,j+k]=1 and sum{m in 1..k-1} X[i,j+m]=0} {
+			for {l in 1..NC-j: X[i+l,j+l]=1 and sum{m in 1..l-1} X[i+m,j+m]=0} {
+				if k+l+j > NC+1 then {
+				let feas[p] := 0;
+				}
+			}
+		}
+		
+	}
+	if feas[p] = 1 then {
+	display X > 'matrixbased/feasibility/results/matrixCheck_results6.txt';
+	}
+}
+set PF := {p in P: feas[p]=1};
+display PF > 'matrixbased/feasibility/results/feas_6.dat';
+
+close;

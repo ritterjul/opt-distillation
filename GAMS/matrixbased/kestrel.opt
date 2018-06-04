@@ -1,0 +1,2 @@
+kestrel_solver KNITRO
+neos_server neos-server.org:3333

@@ -1,0 +1,4 @@
+solve_message = 'MINLP-B&B (20100607): Infeasible root problem\
+1 subproblem, objective = 1e+20\
+Evals: obj = 2, constr = 127, grad = 53, Hes = 71'
+

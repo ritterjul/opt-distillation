@@ -1,0 +1,4 @@
+#example Agrawal 1
+param Fall := 0.4;
+param xF := 1 0.17757 2 0.40458 3 0.27708 4 0.14077;
+data 'properties/CMO/Cyclopentane.dat'

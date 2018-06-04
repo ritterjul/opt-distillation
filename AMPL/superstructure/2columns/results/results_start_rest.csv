@@ -1,0 +1,25 @@
+,NLP,,,,,,MINLP,,,,,
+,CONOPT,,,filter,,,Bonmin,,,MINLP,,
+,,,,,,,,,,,,
+normal,direct,indirect,prefrac,direct,indirect,prefrac,direct,indirect,prefrac,direct,indirect,prefrac
+0.8,143.32,159.09,infeas,143.32,159.09,141.63,147.14,159.09,infeas,147.14,159.09,141.62
+,mix,indirect,,mix,indirect,prefrac,direct,indirect,,direct,indirect,prefrac
+0.9,185.33,192.08,infeas,185.33,192.08,234.16,185.33,192.08,723.48,185.33,192.08,723.48
+,direct,indirect,,direct,indirect,s. indirect,direct,indirect,prefrac,direct,indirect,prefrac
+0.95,236.43,231.55,236.43,236.43,231.55,400.74,236.43,231.55,infeas,236.43,231.55,infeas
+,direct,indirect,direct,direct,indirect,s. indirect,direct,indirect,,direct,indirect,
+0.99,647.96,527.22,infeas,647.96,527.22,527.22,infeas,527.22,infeas,647.96,527.22,infeas
+,direct,indirect,,direct,indirect,indirect,,indirect,,direct,indirect,
+0.995,2094.5,infeas,infeas,2094.5,1480.94,1480.94,infeas,1480.94,infeas,2094.5,1480.94,infeas
+,direct,,,direct,indirect,indirect,,indirect,,direct,indirect,
+large,,,,,,,,,,,,
+0.8,116.37,99.14,,116.37,148.99,99.14,128.97,140.71,infeas,128.97,140.71,99.95
+,mix,app. prefrac,app. s. indirect,mix,indirect,app. prefrac,direct,indirect,,direct,indirect,prefrac
+0.9,145.74,127.6,131.3,145.74,166.45,127.6,151.78,166.45,infeas,151.78,166.45,127.6
+,mix,prefrac,infeas,mix,indirect,prefrac,direct,indirect,,direct,indirect,prefrac
+0.95,160.41,178.08,178.08,160.41,178.08,154.49,160.97,178.08,infeas,160.97,178.01,154.49
+,app. direct,indirect,indirect,app. direct,indirect,prefrac,direct,indirect,,direct,indirect,prefrac
+0.99,181.41,192.45,infeas,181.41,192.45,235.59,181.41,192.45,infeas,181.41,192.45,386.24
+,direct,indirect,,direct,indirect,s. indirect,direct,indirect,,direct,indirect,prefrac
+0.995,196.41,200.35,infeas,196.41,200.35,279.61,196.41,200.35,infeas,196.41,200.35,5525.9
+,direct,indirect,,direct,indirect,s. indirect,direct,indirect,,direct,indirect,prefrac

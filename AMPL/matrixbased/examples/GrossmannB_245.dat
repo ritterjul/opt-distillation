@@ -1,0 +1,4 @@
+#example Grossmann B reduced(2,4,5)
+param Fall := 200;
+param xF := 1 0.3 2 0.4 3 0.3;
+data properties/CMO/Iso_PropanolIso_1Butanol.dat
